@@ -114,7 +114,7 @@ getRoadNetwork <- function(extentfile){
   bbox = bbox(extent)
   lonmin = bbox[1,1];latmin=bbox[2,1];lonmax=bbox[1,2];latmax=bbox[2,2]
   g = graphFromEdges(
-         graphEdgesFromBase(lonmin,latmin,lonmax,latmax,dbname=global.nwdb),
+         graphEdgesFromBase(lonmin,latmin,lonmax,latmax),
          densraster,from_query = FALSE)
   return(g)
 }
