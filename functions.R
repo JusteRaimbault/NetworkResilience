@@ -17,7 +17,11 @@ defaultParams<-function(){
 
 #'
 #' @description random network of the given type and number of nodes
-generateNetwork<-function(type,n,params=defaultParams()){
+generateNetwork<-function(type,n=0,params=defaultParams(),realname=""){
+  
+  if(type=="random"){
+    return(erdos.renyi.game(n=n, 0.2, type ="gnp"))
+  }
   
   if(type=="lattice"){
     return(make_lattice(length=floor(sqrt(n)),dim=2,directed = FALSE))
@@ -27,16 +31,29 @@ generateNetwork<-function(type,n,params=defaultParams()){
     return(sample_pa_age(n,m=10, pa.exp=1, aging.exp=-3, aging.bin=1000,directed = FALSE))
   }
   
+  if(type=="real"){
+    load(paste0('data/',realname,'.RData'))
+    return(g)
+  }
+  
 }
 
 normalizedBetweenness<-function(g){
-  return(mean(betweenness(g)*2/(vcount(g)*(vcount(g)-1))))
+  bw = betweenness(g)*2/(vcount(g)*(vcount(g)-1))
+  y=sort(log(bw),decreasing=T)
+  reg = lm(data=data.frame(x=log(1:length(which(is.finite(y)))),y=y[is.finite(y)]),formula = y~x)
+  return(
+    list(
+      meanBetweenness = mean(bw),
+      alphaBetweenness = reg$coefficients[2]
+    )
+  )
 }
 
 efficiency<-function(g){
   distmat = distances(g)
   diag(distmat)<-Inf
-  return(mean(1/distmat))
+  return(list(efficiency=mean(1/distmat)))
 }
 
 
