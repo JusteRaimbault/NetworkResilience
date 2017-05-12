@@ -1,8 +1,8 @@
 
-library(RPostgreSQL)
-library(rgeos)
-library(rgdal)
-library(raster)
+#library(RPostgreSQL)
+#library(rgeos)
+#library(rgdal)
+#library(raster)
 library(igraph)
 
 

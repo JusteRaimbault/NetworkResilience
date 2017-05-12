@@ -1,0 +1,72 @@
+starting worker pid=23727 on localhost:11972 at 12:51:59.689
+starting worker pid=23736 on localhost:11972 at 12:51:59.906
+starting worker pid=23745 on localhost:11972 at 12:52:00.118
+starting worker pid=23754 on localhost:11972 at 12:52:00.332
+starting worker pid=23763 on localhost:11972 at 12:52:00.545
+starting worker pid=23772 on localhost:11972 at 12:52:00.760
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
