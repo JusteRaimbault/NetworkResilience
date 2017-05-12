@@ -14,16 +14,19 @@ registerDoParallel(cl)
 
 startTime = proc.time()[3]
 
-res <- foreach(i=1:nrow(coords)) %dopar% {
+res <- foreach(i=1:length(realnetworks)) %dopar% {
   source('functions.R')
-  vals <- 
-  
+  g=generateNetwork("real",realname=realnetworks[i])
+  vals <- computeDeterministic(g,measures)
+  res=list()
+  res[[realnetworks[i]]]<-vals
+  return(res)
 }
 
 stopCluster(cl)
 
 show(paste0("Ellapsed Time : ",proc.time()[3]-startTime))
 
-save(res,file='res/real.RData')
+save(res,file='real.RData')
 
 
