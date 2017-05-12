@@ -4,6 +4,7 @@
 # Complex networks : measures and vulnerability
 
 library(igraph)
+library(dplyr)
 
 setwd(paste0(Sys.getenv('MONITORAT'),'/L2AnalyseSpatiale/Partiel/NetworkResilience'))
 
@@ -123,6 +124,40 @@ dev.off()
 test <- bootstrapMeasures("random",1000,measures,1000)
 
 testcorrs <- bootstrapCorrelation("random",n=100,measures,nbootstrap=30)
+
+
+
+
+#####
+## Synthetic Measures
+
+load('synthetic.RData')
+
+synthtypes = c("lattice","pa-age","random","tree")
+
+for(type in synthtypes){
+  show(type)
+  d=unlist(lapply(res,function(l){l[[type]]}))
+  d=data.frame(as.tbl(data.frame(val=d,name=names(d)))%>%group_by(name)%>%summarise(val=mean(val)))
+  dd=d$val;names(dd)<-d$name
+  # handmade knitr, hardcore !
+  show(paste0("$",format(dd["vcount"],digits=2),"\\","pm ",format(dd["vcountSd"],digits=2)," $ & $",
+              format(dd["ecount"],digits=2)," \\pm ",format(dd["ecountSd"],digits=2)," $ & $",
+              format(dd["gamma"],digits=2)," \\pm ",format(dd["gammaSd"],digits=2)," $ & $",
+              format(dd["meanDegree"],digits=2)," \\pm ",format(dd["meanDegreeSd"],digits=2)," $ & $",
+              format(dd["diameter"],digits=2)," \\pm ",format(dd["diameterSd"],digits=2)," $ & $",
+              format(dd["meanBetweenness"],digits=2)," \\pm ",format(dd["meanBetweennessSd"],digits=2)," $ & $",
+              format(dd["alphaBetweenness"],digits=2)," \\pm ",format(dd["alphaBetweennessSd"],digits=2)," $ & $",
+              format(dd["meanCloseness"],digits=2)," \\pm ",format(dd["meanClosenessSd"],digits=2)," $ & $",
+              format(dd["alphaCloseness"],digits=2)," \\pm ",format(dd["alphaClosenessSd"],digits=2)," $ & $",
+              format(dd["efficiency"],digits=2)," \\pm ",format(dd["efficiencySd"],digits=2)," $ & $",
+              format(dd["transitivity"],digits=2)," \\pm ",format(dd["transitivitySd"],digits=2)," $ & $",
+              format(dd["modularity"],digits=2)," \\pm ",format(dd["modularitySd"],digits=2)," $ &"
+              
+              )
+       )
+}
+
 
 
 
