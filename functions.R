@@ -158,18 +158,53 @@ computeDeterministic<-function(g,measures){
 }
 
 
+#deltaMeasure <- function(g,removed_prop,func){
+#  res=c()
+#  for(alpha in removed_prop){
+#    subgraph = subgraph.edges(g,sample.int(n = ecount(g),size = (1-alpha)*ecount(g),replace = FALSE),delete.vertices = F)
+#    res=append(res,func(subgraph)-func(g))
+#  }
+#  return(res)
+#}
 
-
-
-deltaMeasure <- function(g,removed_prop,func){
-  res=c()
-  for(alpha in removed_prop){
-    subgraph = subgraph.edges(g,sample.int(n = ecount(g),size = (1-alpha)*ecount(g),replace = FALSE),delete.vertices = F)
-    res=append(res,func(subgraph)-func(g))
+deltaMeasures<-function(v1,v2){
+  res = list()
+  for(measure in names(v1)){
+    res[[measure]]=v2[[measure]]-v1[[measure]]
   }
   return(res)
 }
 
+#'
+#' @description estimate correlation between measures variations
+bootstrapCorrelation <- function(type,n,measures,nbootstrap){
+  vals = list()
+  for(b in 1:nbootstrap){
+    if(b%%10==0){show(b)}
+    g = generateNetwork(type,n)
+    baselinevals = computeDeterministic(g,measures)
+    for(alpha in seq(from=0.05,to=0.5,by=0.05)){
+      subgraph = subgraph.edges(g,sample.int(n = ecount(g),size = (1-alpha)*ecount(g),replace = FALSE),delete.vertices = F)
+      currentvals = computeDeterministic(subgraph,measures)
+      deltavals = deltaMeasures(baselinevals,currentvals)
+      for(measure in names(deltavals)){
+        if(!measure%in%names(vals)){vals[[measure]]=c(deltavals[[measure]])}
+        else{vals[[measure]]=append(vals[[measure]],deltavals[[measure]])}  
+      }
+    }
+  }
+  # estimate correlation
+  res=list()
+  for(measure in names(vals)){
+    if(measure!="efficiency"){
+      corr = cor.test(vals[[measure]],vals$efficiency)
+      res[[measure]] = corr$estimate
+      res[[paste0(measure,"_inf")]] = corr$conf.int[1]
+      res[[paste0(measure,"_sup")]] = corr$conf.int[2]
+    }
+  }
+  return(res)
+}
 
 
 
