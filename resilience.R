@@ -122,6 +122,7 @@ dev.off()
 
 test <- bootstrapMeasures("random",1000,measures,1000)
 
+testcorrs <- bootstrapCorrelation("random",n=100,measures,nbootstrap=30)
 
 
 
