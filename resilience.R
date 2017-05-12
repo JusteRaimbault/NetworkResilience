@@ -9,12 +9,12 @@ setwd(paste0(Sys.getenv('MONITORAT'),'/L2AnalyseSpatiale/Partiel/NetworkResilien
 
 source('functions.R')
 
-n = 100
+n = 1000
 # real road network ; optimized network ?
-networktypes = c("lattice","pa-age","real")
+networktypes = c("lattice","pa-age","random","tree","real")
 realnetworks = c("idf","lacourtine","londonM25","lyon","paris","randstad")
-indicators = c("stats","gamma","betweenness","closeness","transitivity","efficiency","modularity")
-
+indicators = c("stats","gamma","betweenness","diameter","closeness","transitivity","efficiency","modularity")
+measures = c(gamma,normalizedBetweenness,shortestPathMeasures,clustCoef,louvainModularity)
 
 ## tests
 g=generateNetwork("lattice",n)
@@ -31,6 +31,11 @@ for(b in 1:10000){
 }
 
 g=generateNetwork("real",realname="idf")
+paris=generateNetwork("real",realname="paris")
+randstad=generateNetwork("real",realname="randstad")
+lacourtine=generateNetwork("real",realname="lacourtine")
+
+res <- computeDeterministic(lacourtine,measures)
 
 deltaMeasure(g,c(0.1,0.2,0.3),normalizedBetweenness)
 deltaMeasure(g,c(0.1,0.2,0.3),efficiency)
@@ -50,6 +55,72 @@ for(b in 1:nbootstrap){
 
 cor.test(deltaEff,deltaM)
 
+
+# plots
+g=generateNetwork("real",realname="paris")
+png(filename = 'figures/paris.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0)
+dev.off()
+
+g=generateNetwork("real",realname="idf")
+png(filename = 'figures/idf.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0)
+dev.off()
+
+g=generateNetwork("real",realname="lacourtine")
+png(filename = 'figures/lacourtine.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0)
+dev.off()
+
+g=generateNetwork("real",realname="londonM25")
+png(filename = 'figures/londonM25.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0)
+dev.off()
+
+g=generateNetwork("real",realname="lyon")
+png(filename = 'figures/lyon.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0)
+dev.off()
+
+g=generateNetwork("real",realname="randstad")
+png(filename = 'figures/randstad.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0)
+dev.off()
+
+g=generateNetwork("random",n=1000)
+png(filename = 'figures/random.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0,
+     layout=layout_with_fr,margin=c(-0.2,-0.2,-0.2,-0.2)
+     )
+dev.off()
+
+g=generateNetwork("pa-age",n=1000)
+png(filename = 'figures/pa-age.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0
+     ,layout=layout_with_fr#,margin=c(-0.2,-0.2,-0.2,-0.2)
+     )
+dev.off()
+
+g=generateNetwork("lattice",n=1000)
+png(filename = 'figures/lattice.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0
+     #,layout=layout_on_grid
+     )
+dev.off()
+
+g=generateNetwork("tree",n=1000)
+png(filename = 'figures/tree.png',width = 30,height=30,units = 'cm',res=600)
+plot(g,vertex.size=0.05,vertex.label=NA,edge.color='black',edge.width=1.0,
+     layout=layout_as_tree
+     )
+dev.off()
+
+
+
+####
+#  test bootstrap
+
+test <- bootstrapMeasures("random",500,measures,1000)
 
 
 

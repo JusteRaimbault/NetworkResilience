@@ -10,7 +10,10 @@ library(igraph)
 
 defaultParams<-function(){
   return(list(
-    
+    erdosrenyiProba = 0.005,
+    latticeEdgesProportion = 0.65,
+    pa.m=5,pa.exp=1,aging.exp=-2,aging.bin=100,
+    tree.children = 3
   ))
 }
 
@@ -20,15 +23,23 @@ defaultParams<-function(){
 generateNetwork<-function(type,n=0,params=defaultParams(),realname=""){
   
   if(type=="random"){
-    return(erdos.renyi.game(n=n, 0.2, type ="gnp"))
+    return(erdos.renyi.game(n=n,params$erdosrenyiProba , type ="gnp"))
   }
   
   if(type=="lattice"){
-    return(make_lattice(length=floor(sqrt(n)),dim=2,directed = FALSE))
+    # already perturbate the lattice by sampling edges
+    g=make_lattice(length=floor(sqrt(n)),dim=2,directed = FALSE)
+    # get the layout before removing edges
+    layout = layout_on_grid(g);V(g)$x=layout[,1];V(g)$y=layout[,2]
+    return(subgraph.edges(g,eids = sample.int(n = vcount(g),size=floor(vcount(g)*params$latticeEdgesProportion),replace = F)))
   }
   
   if(type=="pa-age"){
-    return(sample_pa_age(n,m=10, pa.exp=1, aging.exp=-3, aging.bin=1000,directed = FALSE))
+    return(simplify(sample_pa_age(n,m=params$pa.m, params$pa.exp, aging.exp=params$aging.exp, aging.bin=params$aging.bin,directed = FALSE)))
+  }
+  
+  if(type=="tree"){
+    return(make_tree(n=n,children=params$tree.children,mode="undirected"))
   }
   
   if(type=="real"){
@@ -38,8 +49,18 @@ generateNetwork<-function(type,n=0,params=defaultParams(),realname=""){
   
 }
 
+gamma<-function(g){
+  return(list(
+    vcount=vcount(g),
+    ecount=ecount(g),
+    gamma = 2*ecount(g)/(vcount(g)*(vcount(g)-1)),
+    meanDegree = mean(degree(g))
+  )
+  )
+}
+
 normalizedBetweenness<-function(g){
-  bw = betweenness(g)*2/(vcount(g)*(vcount(g)-1))
+  bw = edge_betweenness(g)*2/(vcount(g)*(vcount(g)-1))
   y=sort(log(bw),decreasing=T)
   reg = lm(data=data.frame(x=log(1:length(which(is.finite(y)))),y=y[is.finite(y)]),formula = y~x)
   return(
@@ -50,11 +71,94 @@ normalizedBetweenness<-function(g){
   )
 }
 
-efficiency<-function(g){
+
+#'
+#' @description includes closeness, efficiency, and diameter
+#'      note : distances are not weighted for comparison purposes between synthetic and real
+#'      , meaning that we consider only topological distance.
+shortestPathMeasures<-function(g){
   distmat = distances(g)
+  distmatfinite = distmat
+  distmatfinite[!is.finite(distmatfinite)]=0
+  # get diameter
+  diameter = max(distmatfinite)
+  #show(diameter)
+  # get closeness
+  closenesses = (vcount(g)-1) / rowSums(distmatfinite[rowSums(distmatfinite)>0,])
+  #show(closenesses)
+  y=sort(log(closenesses),decreasing=T)
+  reg = lm(data=data.frame(x=log(1:length(which(is.finite(y)))),y=y[is.finite(y)]),formula = y~x)
+  # compute efficiency
   diag(distmat)<-Inf
-  return(list(efficiency=mean(1/distmat)))
+  efficiency=mean(1/distmat)
+  return(list(
+    diameter=diameter,
+    efficiency=efficiency,
+    meanCloseness=mean(closenesses),
+    alphaCloseness=reg$coefficients[2]
+  ))
 }
+
+#'
+#'
+clustCoef<-function(g){
+  return(list(transitivity=transitivity(g)))
+}
+
+#'
+#'
+louvainModularity<-function(g){
+  com=cluster_louvain(g)
+  return(list(
+    modularity = max(com$modularity)
+  ))
+}
+
+
+
+#'
+#' @description each function in measure should return a named list
+#'    in bootstrap cases, returns 
+bootstrapMeasures <- function(type,n,measures,nbootstrap,allValues = F){
+    vals = list()
+    for(b in 1:nbootstrap){
+      if(b%%100==0){show(b)}
+      g = generateNetwork(type,n)
+      currentvals = computeDeterministic(g,measures)
+      for(measure in names(currentvals)){
+        if(!measure%in%names(vals)){vals[[measure]]=c(currentvals[[measure]])}
+        else{vals[[measure]]=append(vals[[measure]],currentvals[[measure]])}   
+      }
+    }
+    show(names(vals))
+    if(allValues==T){return(vals)}
+    else{
+      # compute mean and sd
+      res=list()
+      for(measure in names(vals)){
+        res[[measure]]=mean(vals[[measure]])
+        res[[paste0(measure,"Sd")]]=sd(vals[[measure]])
+      }
+      return(res)
+    }
+}
+
+
+#'
+#' @description computes mesures on a fixed network
+computeDeterministic<-function(g,measures){
+  res=list()
+  for(measure in measures){
+    val = measure(g)
+    for(resname in names(val)){
+      res[[resname]]=val[[resname]]
+    }
+  }
+  return(res)
+}
+
+
+
 
 
 deltaMeasure <- function(g,removed_prop,func){
@@ -67,19 +171,6 @@ deltaMeasure <- function(g,removed_prop,func){
 }
 
 
-#'
-#' @description each function in measure should return a named list
-estimateRandomMeasures <- function(type,n,measures,nbootstrap){
-  vals = list()
-  for(b in 1:nbootstrap){
-    if(b%%100==0){show(b)}
-    g = generateNetwork(type,n)
-    for(measure in measures){
-      val = measure(g)
-      
-    }
-  }
-}
 
 
 
