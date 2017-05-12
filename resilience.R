@@ -120,7 +120,7 @@ dev.off()
 ####
 #  test bootstrap
 
-test <- bootstrapMeasures("random",500,measures,1000)
+test <- bootstrapMeasures("random",1000,measures,1000)
 
 
 
