@@ -122,7 +122,7 @@ louvainModularity<-function(g){
 bootstrapMeasures <- function(type,n,measures,nbootstrap,allValues = F){
     vals = list()
     for(b in 1:nbootstrap){
-      if(b%%100==0){show(b)}
+      if(b%%10==0){show(b)}
       g = generateNetwork(type,n)
       currentvals = computeDeterministic(g,measures)
       for(measure in names(currentvals)){
