@@ -54,13 +54,29 @@ gamma<-function(g){
     vcount=vcount(g),
     ecount=ecount(g),
     gamma = 2*ecount(g)/(vcount(g)*(vcount(g)-1)),
-    meanDegree = mean(degree(g))
+    meanDegree = mean(degree(g)),
+    mu = ecount(g) - vcount(g) + 1,
+    alpha = (ecount(g) - vcount(g) + 1)/(2*vcount(g)-5)
   )
   )
 }
 
-normalizedBetweenness<-function(g){
-  bw = edge_betweenness(g)*2/(vcount(g)*(vcount(g)-1))
+
+#'
+#'
+normalizedBetweenness<-function(g,subsample=0,cutoff=100){
+  if(subsample>0){
+    m=as_adjacency_matrix(g)
+    inds = sample.int(n = nrow(m),size = floor(subsample*nrow(m)),replace = F)
+    g=graph_from_adjacency_matrix(m[inds,inds])
+  }
+  show(paste0('computing betwenness for graph of size ',vcount(g),' with cutoff ',cutoff))
+  if(cutoff==0){bw = edge_betweenness(g)*2/(vcount(g)*(vcount(g)-1))}
+  else{
+    bw = estimate_edge_betweenness(g,cutoff=cutoff)*2/(vcount(g)*(vcount(g)-1))
+    # normalization should be a bit different with cutoff ?
+    # let approximate
+  }
   y=sort(log(bw),decreasing=T)
   reg = lm(data=data.frame(x=log(1:length(which(is.finite(y)))),y=y[is.finite(y)]),formula = y~x)
   return(

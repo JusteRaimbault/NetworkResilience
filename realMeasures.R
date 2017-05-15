@@ -6,7 +6,8 @@ setwd(paste0(Sys.getenv('MONITORAT'),'/L2AnalyseSpatiale/Partiel/NetworkResilien
 source('functions.R')
 
 realnetworks = c("idf","lacourtine","londonM25","lyon","paris","randstad")
-measures = c(gamma,normalizedBetweenness,shortestPathMeasures,clustCoef,louvainModularity)
+measures = c(gamma,normalizedBetweenness)#,shortestPathMeasures,
+             #clustCoef,louvainModularity)
 
 library(doParallel)
 cl <- makeCluster(6,outfile='log')

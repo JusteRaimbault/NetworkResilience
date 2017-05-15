@@ -35,6 +35,15 @@ g=generateNetwork("real",realname="idf")
 paris=generateNetwork("real",realname="paris")
 randstad=generateNetwork("real",realname="randstad")
 lacourtine=generateNetwork("real",realname="lacourtine")
+london=generateNetwork("real",realname="londonM25")
+
+
+normalizedBetweenness(lacourtine)
+normalizedBetweenness(lacourtine,subsample = 0.8)
+normalizedBetweenness(lacourtine,cutoff =  100)
+
+normalizedBetweenness(randstad,subsample = 0.5)
+normalizedBetweenness(randstad,cutoff =  50)
 
 res <- computeDeterministic(lacourtine,measures)
 
