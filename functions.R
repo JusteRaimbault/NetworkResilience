@@ -13,7 +13,8 @@ defaultParams<-function(){
     erdosrenyiProba = 0.005,
     latticeEdgesProportion = 0.65,
     pa.m=5,pa.exp=1,aging.exp=-2,aging.bin=100,
-    tree.children = 3
+    tree.children = 3,
+    ego.order = 10
   ))
 }
 
@@ -64,14 +65,19 @@ gamma<-function(g){
 
 #'
 #'
-normalizedBetweenness<-function(g,subsample=0,cutoff=100){
+normalizedBetweenness<-function(g,subsample=0,cutoff=0,ego.order=0){
   if(subsample>0){
     m=as_adjacency_matrix(g)
     inds = sample.int(n = nrow(m),size = floor(subsample*nrow(m)),replace = F)
     g=graph_from_adjacency_matrix(m[inds,inds])
   }
   show(paste0('computing betwenness for graph of size ',vcount(g),' with cutoff ',cutoff))
-  if(cutoff==0){bw = edge_betweenness(g)*2/(vcount(g)*(vcount(g)-1))}
+  if(cutoff==0){
+    if(ego.order==0){
+      bw = edge_betweenness(g)*2/(vcount(g)*(vcount(g)-1))}
+    }else{
+      show('bootstrapping betwenness')
+    }
   else{
     bw = estimate_edge_betweenness(g,cutoff=cutoff)*2/(vcount(g)*(vcount(g)-1))
     # normalization should be a bit different with cutoff ?
@@ -191,13 +197,14 @@ deltaMeasures<-function(v1,v2){
   return(res)
 }
 
+
 #'
 #' @description estimate correlation between measures variations
-bootstrapCorrelation <- function(type,n,measures,nbootstrap){
+bootstrapCorrelation <- function(type,n,measures,nbootstrap,realname=""){
   vals = list()
   for(b in 1:nbootstrap){
     if(b%%10==0){show(b)}
-    g = generateNetwork(type,n)
+    g = generateNetwork(type,n,realname=realname)
     baselinevals = computeDeterministic(g,measures)
     for(alpha in seq(from=0.05,to=0.5,by=0.05)){
       subgraph = subgraph.edges(g,sample.int(n = ecount(g),size = (1-alpha)*ecount(g),replace = FALSE),delete.vertices = F)

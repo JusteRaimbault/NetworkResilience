@@ -51,6 +51,12 @@ deltaMeasure(g,c(0.1,0.2,0.3),normalizedBetweenness)
 deltaMeasure(g,c(0.1,0.2,0.3),efficiency)
 
 
+# test subsampling betweenness
+for(i in 1:10){
+gsub = make_ego_graph(randstad,order=50,nodes = V(randstad)[sample.int(vcount(randstad),size=1)])
+show(normalizedBetweenness(gsub[[1]]))
+}
+
 # Q : how do ∆measure correlate with ∆efficiency (= measure of resilience ?)
 removals = seq(from=0.05,to=0.5,by=0.05)
 measure=normalizedBetweenness
