@@ -53,7 +53,7 @@ deltaMeasure(g,c(0.1,0.2,0.3),efficiency)
 
 # test subsampling betweenness
 for(i in 1:10){
-gsub = make_ego_graph(randstad,order=50,nodes = V(randstad)[sample.int(vcount(randstad),size=1)])
+gsub = make_ego_graph(lacourtine,order=50,nodes = V(lacourtine)[sample.int(vcount(lacourtine),size=1)])
 show(normalizedBetweenness(gsub[[1]]))
 }
 

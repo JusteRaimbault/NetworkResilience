@@ -14,7 +14,7 @@ defaultParams<-function(){
     latticeEdgesProportion = 0.65,
     pa.m=5,pa.exp=1,aging.exp=-2,aging.bin=100,
     tree.children = 3,
-    ego.order = 10
+    ego.order = 50
   ))
 }
 
@@ -45,7 +45,9 @@ generateNetwork<-function(type,n=0,params=defaultParams(),realname=""){
   
   if(type=="real"){
     load(paste0('data/',realname,'.RData'))
-    return(g)
+    if(params$ego.order>0){res = make_ego_graph(g,order=params$ego.order,nodes = V(g)[sample.int(vcount(g),size=1)])}
+    else{res = g}
+    return(res)
   }
   
 }
@@ -77,6 +79,7 @@ normalizedBetweenness<-function(g,subsample=0,cutoff=0,ego.order=0){
       bw = edge_betweenness(g)*2/(vcount(g)*(vcount(g)-1))}
     }else{
       show('bootstrapping betwenness')
+      # TODO
     }
   else{
     bw = estimate_edge_betweenness(g,cutoff=cutoff)*2/(vcount(g)*(vcount(g)-1))
@@ -203,10 +206,11 @@ deltaMeasures<-function(v1,v2){
 bootstrapCorrelation <- function(type,n,measures,nbootstrap,realname=""){
   vals = list()
   for(b in 1:nbootstrap){
-    if(b%%10==0){show(b)}
+    if(b%%10==0){show(paste0('bootstrap corrs : ',b))}
     g = generateNetwork(type,n,realname=realname)
     baselinevals = computeDeterministic(g,measures)
     for(alpha in seq(from=0.05,to=0.5,by=0.05)){
+      show(paste0('alpha = ',alpha))
       subgraph = subgraph.edges(g,sample.int(n = ecount(g),size = (1-alpha)*ecount(g),replace = FALSE),delete.vertices = F)
       currentvals = computeDeterministic(subgraph,measures)
       deltavals = deltaMeasures(baselinevals,currentvals)
