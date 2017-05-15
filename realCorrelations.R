@@ -15,7 +15,7 @@ startTime = proc.time()[3]
 
 res <- foreach(i=1:(4*length(realnetworks))) %dopar% {
   source('functions.R')
-  vals <- bootstrapCorrelation("real",n=0,measures=measures,nbootstrap=100,realname=realnetworks[(i%%6)+1])
+  vals <- bootstrapCorrelation("real",n=0,measures=measures,nbootstrap=2,realname=realnetworks[(i%%6)+1])
   res=list()
   res[[realnetworks[(i%%6)+1]]]<-vals
   return(res)
@@ -25,6 +25,6 @@ stopCluster(cl)
 
 show(paste0("Ellapsed Time : ",proc.time()[3]-startTime))
 
-save(res,file='realCorrelations.RData')
+save(res,file='realCorrelations_test.RData')
 
 

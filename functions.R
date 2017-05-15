@@ -14,7 +14,7 @@ defaultParams<-function(){
     latticeEdgesProportion = 0.65,
     pa.m=5,pa.exp=1,aging.exp=-2,aging.bin=100,
     tree.children = 3,
-    ego.order = 50
+    ego.order = 30
   ))
 }
 
