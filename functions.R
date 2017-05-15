@@ -45,7 +45,7 @@ generateNetwork<-function(type,n=0,params=defaultParams(),realname=""){
   
   if(type=="real"){
     load(paste0('data/',realname,'.RData'))
-    if(params$ego.order>0){res = make_ego_graph(g,order=params$ego.order,nodes = V(g)[sample.int(vcount(g),size=1)])}
+    if(params$ego.order>0){res = make_ego_graph(g,order=params$ego.order,nodes = V(g)[sample.int(vcount(g),size=1)])[[1]]}
     else{res = g}
     return(res)
   }
@@ -76,12 +76,12 @@ normalizedBetweenness<-function(g,subsample=0,cutoff=0,ego.order=0){
   show(paste0('computing betwenness for graph of size ',vcount(g),' with cutoff ',cutoff))
   if(cutoff==0){
     if(ego.order==0){
-      bw = edge_betweenness(g)*2/(vcount(g)*(vcount(g)-1))}
+      bw = edge_betweenness(g)*2/(vcount(g)*(vcount(g)-1))
     }else{
       show('bootstrapping betwenness')
       # TODO
     }
-  else{
+  }else{
     bw = estimate_edge_betweenness(g,cutoff=cutoff)*2/(vcount(g)*(vcount(g)-1))
     # normalization should be a bit different with cutoff ?
     # let approximate
