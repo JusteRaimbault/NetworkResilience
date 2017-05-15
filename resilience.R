@@ -174,6 +174,30 @@ for(type in synthtypes){
 }
 
 
+##
+# Real measures
+
+
+
+
+
+##
+# Real correlations
+
+
+
+
+##
+# Synthetic correlations
+
+
+
+
+
+
+
+
+
 
 
 
