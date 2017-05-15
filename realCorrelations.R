@@ -8,7 +8,7 @@ measures = c(gamma,normalizedBetweenness,shortestPathMeasures)#,
 #clustCoef,louvainModularity)
 
 library(doParallel)
-cl <- makeCluster(24,outfile='logrealcorrs')
+cl <- makeCluster(6,outfile='logrealcorrs')
 registerDoParallel(cl)
 
 startTime = proc.time()[3]

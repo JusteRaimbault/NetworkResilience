@@ -48259,3 +48259,193 @@ Warning message:
 In cor(x, y) : the standard deviation is zero
 Warning message:
 In cor(x, y) : the standard deviation is zero
+starting worker pid=59982 on localhost:11989 at 22:33:35.811
+starting worker pid=59991 on localhost:11989 at 22:33:36.028
+starting worker pid=60000 on localhost:11989 at 22:33:36.246
+starting worker pid=60009 on localhost:11989 at 22:33:36.475
+starting worker pid=60018 on localhost:11989 at 22:33:36.691
+starting worker pid=60027 on localhost:11989 at 22:33:36.908
+starting worker pid=60036 on localhost:11989 at 22:33:37.125
+starting worker pid=60045 on localhost:11989 at 22:33:37.344
+starting worker pid=60054 on localhost:11989 at 22:33:37.562
+starting worker pid=60063 on localhost:11989 at 22:33:37.776
+starting worker pid=60072 on localhost:11989 at 22:33:37.993
+starting worker pid=60081 on localhost:11989 at 22:33:38.204
+starting worker pid=60090 on localhost:11989 at 22:33:38.417
+starting worker pid=60099 on localhost:11989 at 22:33:38.634
+starting worker pid=60108 on localhost:11989 at 22:33:38.850
+starting worker pid=60117 on localhost:11989 at 22:33:39.067
+starting worker pid=60126 on localhost:11989 at 22:33:39.287
+starting worker pid=60135 on localhost:11989 at 22:33:39.503
+starting worker pid=60144 on localhost:11989 at 22:33:39.722
+starting worker pid=60153 on localhost:11989 at 22:33:39.942
+starting worker pid=60162 on localhost:11989 at 22:33:40.162
+starting worker pid=60171 on localhost:11989 at 22:33:40.378
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+Error in unserialize(node$con) : error reading from connection
+Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
+Execution halted
+starting worker pid=60270 on localhost:11818 at 22:34:00.579
+starting worker pid=60279 on localhost:11818 at 22:34:00.795
+starting worker pid=60288 on localhost:11818 at 22:34:01.012
+starting worker pid=60297 on localhost:11818 at 22:34:01.232
+starting worker pid=60306 on localhost:11818 at 22:34:01.448
+starting worker pid=60315 on localhost:11818 at 22:34:01.661
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+Loading required package: foreach
+Loading required package: foreach
+Loading required package: foreach
+Loading required package: foreach
+Loading required package: foreach
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: parallel
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: parallel
+Loading required package: parallel
+Loading required package: parallel
+Warning message:
+In cor(x, y) : the standard deviation is zero
+Warning message:
+In cor(x, y) : the standard deviation is zero
+Warning message:
+In cor(x, y) :Warning message:
+In cor(x, y) :Warning message:
+Warning message:
+In cor(x, y) : the standard deviation is zero
+In cor(x, y) : the standard deviation is zero
+ the standard deviation is zero
+ the standard deviation is zero
