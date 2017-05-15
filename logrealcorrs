@@ -48449,3 +48449,105 @@ In cor(x, y) : the standard deviation is zero
 In cor(x, y) : the standard deviation is zero
  the standard deviation is zero
  the standard deviation is zero
+starting worker pid=60944 on localhost:11788 at 22:49:44.067
+starting worker pid=60953 on localhost:11788 at 22:49:44.287
+starting worker pid=60962 on localhost:11788 at 22:49:44.508
+starting worker pid=60971 on localhost:11788 at 22:49:44.732
+starting worker pid=60980 on localhost:11788 at 22:49:44.960
+starting worker pid=60989 on localhost:11788 at 22:49:45.179
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+Loading required package: foreach
+Loading required package: foreach
+Loading required package: foreach
+The following object is masked from ‘package:base’:
+
+    union
+
+Loading required package: foreach
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: parallel
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: parallel
+Loading required package: parallel
+Loading required package: parallel
+Warning message:
+In cor(x, y) :Warning message:
+Warning message:
+ the standard deviation is zero
+In cor(x, y) :Warning message:
+In cor(x, y) : the standard deviation is zero
+In cor(x, y) :Warning message:
+ the standard deviation is zero
+ the standard deviation is zero
+In cor(x, y) : the standard deviation is zero
+Warning message:
+In cor(x, y) : the standard deviation is zero
