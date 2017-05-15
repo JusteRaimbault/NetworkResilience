@@ -205,7 +205,7 @@ deltaMeasures<-function(v1,v2){
 #' @description estimate correlation between measures variations
 bootstrapCorrelation <- function(type,n,measures,nbootstrap,realname=""){
   
-  cl <- makeCluster(8)
+  cl <- makeCluster(10,log='logbootcor')
   registerDoParallel(cl)
   parvals <- foreach(b=1:nbootstrap) %dopar% {
     source('functions.R')

@@ -199,19 +199,15 @@ for(i in 1:length(realnetworks)){
 ##
 # Real correlations
 
-load('realCorrelations_test.RData')
+load('realCorrelations_test2.RData')
 
 realnetworks = c("idf","lacourtine","londonM25","lyon","paris","randstad")
 measures = c("vcount","ecount","gamma","mu","alpha","meanDegree","meanBetweenness")
 
-for(type in synthtypes){
-  show(type)
-  d=unlist(lapply(res,function(l){l[[type]]}))
-  d=data.frame(as.tbl(data.frame(val=d,name=names(d)))%>%group_by(name)%>%summarise(val=mean(val)))
-  dd=d$val;names(dd)<-d$name
-  for(measure in measures){
-    show(paste0(measure, " : ",format(dd[paste0(measure,".cor")],digits=2),' [',format(dd[paste0(measure,"_inf")],digits=2),',',format(dd[paste0(measure,"_sup")],digits=2),']' ))
-  }
+for(i in 1:length(realnetworks)){
+  show(realnetworks[i])
+  d=res[[i]][[realnetworks[i]]]
+  show(d)
 }
 
 
