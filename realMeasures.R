@@ -28,6 +28,6 @@ stopCluster(cl)
 
 show(paste0("Ellapsed Time : ",proc.time()[3]-startTime))
 
-save(res,file='real.RData')
+save(res,file='real-nocutoff.RData')
 
 

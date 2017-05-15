@@ -64,7 +64,7 @@ gamma<-function(g){
 
 #'
 #'
-normalizedBetweenness<-function(g,subsample=0,cutoff=100){
+normalizedBetweenness<-function(g,subsample=0,cutoff=0){
   if(subsample>0){
     m=as_adjacency_matrix(g)
     inds = sample.int(n = nrow(m),size = floor(subsample*nrow(m)),replace = F)
