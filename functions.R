@@ -4,7 +4,7 @@
 #library(rgdal)
 #library(raster)
 library(igraph)
-
+library(doParallel)
 
 # functions
 
@@ -14,7 +14,7 @@ defaultParams<-function(){
     latticeEdgesProportion = 0.65,
     pa.m=5,pa.exp=1,aging.exp=-2,aging.bin=100,
     tree.children = 3,
-    ego.order = 30
+    ego.order = 50
   ))
 }
 
@@ -204,8 +204,12 @@ deltaMeasures<-function(v1,v2){
 #'
 #' @description estimate correlation between measures variations
 bootstrapCorrelation <- function(type,n,measures,nbootstrap,realname=""){
-  vals = list()
-  for(b in 1:nbootstrap){
+  
+  cl <- makeCluster(8)
+  registerDoParallel(cl)
+  parvals <- foreach(b=1:nbootstrap) %dopar% {
+    source('functions.R')
+    vals = list()
     if(b%%10==0){show(paste0('bootstrap corrs : ',b))}
     g = generateNetwork(type,n,realname=realname)
     baselinevals = computeDeterministic(g,measures)
@@ -219,12 +223,17 @@ bootstrapCorrelation <- function(type,n,measures,nbootstrap,realname=""){
         else{vals[[measure]]=append(vals[[measure]],deltavals[[measure]])}  
       }
     }
+    return(vals)
   }
+  stopCluster(cl)
+  
+  
   # estimate correlation
   res=list()
-  for(measure in names(vals)){
+  for(measure in names(parvals[[1]])){
+    measurevals = unlist(lapply(parvals,function(l){l[[measure]]}))
     if(measure!="efficiency"){
-      corr = cor.test(vals[[measure]],vals$efficiency)
+      corr = cor.test(measurevals,unlist(lapply(parvals,function(l){l[["efficiency"]]})))
       res[[measure]] = corr$estimate
       res[[paste0(measure,"_inf")]] = corr$conf.int[1]
       res[[paste0(measure,"_sup")]] = corr$conf.int[2]

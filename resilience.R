@@ -156,33 +156,63 @@ for(type in synthtypes){
   d=data.frame(as.tbl(data.frame(val=d,name=names(d)))%>%group_by(name)%>%summarise(val=mean(val)))
   dd=d$val;names(dd)<-d$name
   # handmade knitr, hardcore !
-  show(paste0("$",format(dd["vcount"],digits=2),"\\","pm ",format(dd["vcountSd"],digits=2)," $ & $",
-              format(dd["ecount"],digits=2)," \\pm ",format(dd["ecountSd"],digits=2)," $ & $",
-              format(dd["gamma"],digits=2)," \\pm ",format(dd["gammaSd"],digits=2)," $ & $",
-              format(dd["meanDegree"],digits=2)," \\pm ",format(dd["meanDegreeSd"],digits=2)," $ & $",
-              format(dd["diameter"],digits=2)," \\pm ",format(dd["diameterSd"],digits=2)," $ & $",
-              format(dd["meanBetweenness"],digits=2)," \\pm ",format(dd["meanBetweennessSd"],digits=2)," $ & $",
-              format(dd["alphaBetweenness"],digits=2)," \\pm ",format(dd["alphaBetweennessSd"],digits=2)," $ & $",
-              format(dd["meanCloseness"],digits=2)," \\pm ",format(dd["meanClosenessSd"],digits=2)," $ & $",
-              format(dd["alphaCloseness"],digits=2)," \\pm ",format(dd["alphaClosenessSd"],digits=2)," $ & $",
-              format(dd["efficiency"],digits=2)," \\pm ",format(dd["efficiencySd"],digits=2)," $ & $",
-              format(dd["transitivity"],digits=2)," \\pm ",format(dd["transitivitySd"],digits=2)," $ & $",
-              format(dd["modularity"],digits=2)," \\pm ",format(dd["modularitySd"],digits=2)," $ &"
-              
-              )
-       )
+  show(dd["meanDegree"])
+  show(dd["meanDegreeSd"])
+  # show(paste0("$",format(dd["vcount"],digits=2),"\\","pm ",format(dd["vcountSd"],digits=2)," $ & $",
+  #             format(dd["ecount"],digits=2)," \\pm ",format(dd["ecountSd"],digits=2)," $ & $",
+  #             format(dd["gamma"],digits=2)," \\pm ",format(dd["gammaSd"],digits=2)," $ & $",
+  #             format(dd["meanDegree"],digits=2)," \\pm ",format(dd["meanDegreeSd"],digits=2)," $ & $",
+  #             format(dd["diameter"],digits=2)," \\pm ",format(dd["diameterSd"],digits=2)," $ & $",
+  #             format(dd["meanBetweenness"],digits=2)," \\pm ",format(dd["meanBetweennessSd"],digits=2)," $ & $",
+  #             format(dd["alphaBetweenness"],digits=2)," \\pm ",format(dd["alphaBetweennessSd"],digits=2)," $ & $",
+  #             format(dd["meanCloseness"],digits=2)," \\pm ",format(dd["meanClosenessSd"],digits=2)," $ & $",
+  #             format(dd["alphaCloseness"],digits=2)," \\pm ",format(dd["alphaClosenessSd"],digits=2)," $ & $",
+  #             format(dd["efficiency"],digits=2)," \\pm ",format(dd["efficiencySd"],digits=2)," $ & $",
+  #             format(dd["transitivity"],digits=2)," \\pm ",format(dd["transitivitySd"],digits=2)," $ & $",
+  #             format(dd["modularity"],digits=2)," \\pm ",format(dd["modularitySd"],digits=2)," $ &"
+  #             
+  #             )
+  #      )
 }
+
 
 
 ##
 # Real measures
 
+load('real-nocutoff.RData')
 
+realnetworks = c("idf","lacourtine","londonM25","lyon","paris","randstad")
+measures = c("vcount","ecount","gamma","mu","alpha","meanDegree","meanBetweenness")
+
+
+for(i in 1:length(realnetworks)){
+  show(realnetworks[i])
+  d=res[[i]][[realnetworks[i]]]
+  for(measure in measures){
+    show(paste0(measure, " : ",format(d[measure],digits=2)))
+  }
+}
 
 
 
 ##
 # Real correlations
+
+load('realCorrelations_test.RData')
+
+realnetworks = c("idf","lacourtine","londonM25","lyon","paris","randstad")
+measures = c("vcount","ecount","gamma","mu","alpha","meanDegree","meanBetweenness")
+
+for(type in synthtypes){
+  show(type)
+  d=unlist(lapply(res,function(l){l[[type]]}))
+  d=data.frame(as.tbl(data.frame(val=d,name=names(d)))%>%group_by(name)%>%summarise(val=mean(val)))
+  dd=d$val;names(dd)<-d$name
+  for(measure in measures){
+    show(paste0(measure, " : ",format(dd[paste0(measure,".cor")],digits=2),' [',format(dd[paste0(measure,"_inf")],digits=2),',',format(dd[paste0(measure,"_sup")],digits=2),']' ))
+  }
+}
 
 
 
@@ -190,10 +220,20 @@ for(type in synthtypes){
 ##
 # Synthetic correlations
 
+load('synthCorrelations.RData')
 
+synthtypes = c("lattice","pa-age","random","tree")
+measures = c("vcount","ecount","gamma","mu","alpha","meanDegree","meanBetweenness")
 
-
-
+for(type in synthtypes){
+  show(type)
+  d=unlist(lapply(res,function(l){l[[type]]}))
+  d=data.frame(as.tbl(data.frame(val=d,name=names(d)))%>%group_by(name)%>%summarise(val=mean(val)))
+  dd=d$val;names(dd)<-d$name
+  for(measure in measures){
+    show(paste0(measure, " : ",format(dd[paste0(measure,".cor")],digits=2),' [',format(dd[paste0(measure,"_inf")],digits=2),',',format(dd[paste0(measure,"_sup")],digits=2),']' ))
+  }
+}
 
 
 
