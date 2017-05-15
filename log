@@ -82,3 +82,237 @@ Execution halted
 Error in unserialize(node$con) : error reading from connection
 Calls: <Anonymous> ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
 Execution halted
+starting worker pid=51994 on localhost:11121 at 11:00:11.799
+starting worker pid=52003 on localhost:11121 at 11:00:12.017
+starting worker pid=52012 on localhost:11121 at 11:00:12.239
+starting worker pid=52021 on localhost:11121 at 11:00:12.460
+starting worker pid=52030 on localhost:11121 at 11:00:12.689
+starting worker pid=52039 on localhost:11121 at 11:00:12.907
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+[1] "computing betwenness for graph of size 6712 with cutoff 100"
+[1] "computing betwenness for graph of size 7874 with cutoff 100"
+[1] "computing betwenness for graph of size 22147 with cutoff 100"
+[1] "computing betwenness for graph of size 85348 with cutoff 100"
+[1] "computing betwenness for graph of size 116935 with cutoff 100"
+[1] "computing betwenness for graph of size 123215 with cutoff 100"
+starting worker pid=52119 on localhost:11749 at 11:03:28.947
+starting worker pid=52128 on localhost:11749 at 11:03:29.164
+starting worker pid=52137 on localhost:11749 at 11:03:29.383
+starting worker pid=52146 on localhost:11749 at 11:03:29.595
+starting worker pid=52155 on localhost:11749 at 11:03:29.814
+starting worker pid=52164 on localhost:11749 at 11:03:30.031
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+[1] "computing betwenness for graph of size 6712 with cutoff 200"
+[1] "computing betwenness for graph of size 7874 with cutoff 200"
+[1] "computing betwenness for graph of size 22147 with cutoff 200"
+[1] "computing betwenness for graph of size 85348 with cutoff 200"
+[1] "computing betwenness for graph of size 116935 with cutoff 200"
+[1] "computing betwenness for graph of size 123215 with cutoff 200"
+starting worker pid=52233 on localhost:11879 at 11:05:17.045
+starting worker pid=52242 on localhost:11879 at 11:05:17.262
+starting worker pid=52251 on localhost:11879 at 11:05:17.473
+starting worker pid=52260 on localhost:11879 at 11:05:17.686
+starting worker pid=52269 on localhost:11879 at 11:05:17.906
+starting worker pid=52278 on localhost:11879 at 11:05:18.109
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+The following object is masked from ‘package:base’:
+
+    union
+
+[1] "computing betwenness for graph of size 6712 with cutoff 0"
+[1] "computing betwenness for graph of size 7874 with cutoff 0"
+[1] "computing betwenness for graph of size 22147 with cutoff 0"
+[1] "computing betwenness for graph of size 85348 with cutoff 0"
+[1] "computing betwenness for graph of size 116935 with cutoff 0"
+[1] "computing betwenness for graph of size 123215 with cutoff 0"
